@@ -1,13 +1,13 @@
 class StudentNode {
   public:
     StudentNode();
-    StudentNode(int key);
+    StudentNode(int s, string n, string l, string m, double g, int a);
     virtual ~StudentNode();
 
     int studentID;
-    String name;
-    String level;
-    String major;
+    string name;
+    string level;
+    string major;
     double GPA;
     int advisorID;
     StudentNode *left;
