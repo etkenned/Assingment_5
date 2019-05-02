@@ -85,7 +85,12 @@ void StudentTree::recSave(StudentNode * node)
   if(stSaveFile.is_open()) // recursively reads through the tree and writes all the data to a text file
   {
     recSave(node->left);
-    stSaveFile << node->studentID << " " << node->name << " " << node->level << " " << node->major << " " << node->GPA << " " << node-> advisorID << endl;
+    stSaveFile << node->studentID << endl;
+    stSaveFile << node->name << endl;
+    stSaveFile << node->level << endl;
+    stSaveFile << node->major << endl;
+    stSaveFile << node->GPA << endl;
+    stSaveFile << node-> advisorID << endl;
     recSave(node->right);
   }
 
