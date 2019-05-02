@@ -339,5 +339,52 @@ int StuddentTree::findAdvisor(int sid)
 
 void StudentTree::loadSave()
 {
-
+  string line = "";
+  fstream loadFile("StudentSaveData.txt")
+  if(loadFile.is_open())
+  {
+    int tempID;
+    string tempName;
+    string tempLevel;
+    string tempMajor;
+    double tempGPA;
+    int tempAdvisor;
+    bool one = true;
+    bool two = true;
+    bool three = true;
+    bool four = true;
+    bool five = true;
+    bool six = true;
+     while(getline(inputFile,line))
+     {
+       if(one)
+       {
+         tempID = line;
+       }
+       else if(two)
+       {
+         tempName = line;
+       }
+       else if(three)
+       {
+         tempLevel = line;
+       }
+       else if(four)
+       {
+         tempMajor = line;
+       }
+       else if(five)
+       {
+         tempGPA = line;
+       }
+       else if(six)
+       {
+         tempAdvisor = line;
+       }
+       else
+       {
+         //make the new student and insert them
+       }
+     }
+  }
 }
