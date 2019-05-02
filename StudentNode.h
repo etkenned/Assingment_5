@@ -1,4 +1,9 @@
-class StudentNode {
+#include <iostream>
+
+using namespace std;
+
+class StudentNode
+{
   public:
     StudentNode();
     StudentNode(int s, string n, string l, string m, double g, int a);

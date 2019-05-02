@@ -1,7 +1,7 @@
 class FacultyNode {
   public:
     FacultyNode();
-    FacultyNode(int key);
+    FacultyNode(int f, string n, string l, string d, int[] a);
     virtual ~FacultyNode();
 
     int facultyID;

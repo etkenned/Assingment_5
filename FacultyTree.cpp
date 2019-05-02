@@ -1,21 +1,21 @@
-#include "StudentTree.h"
+Faculty#include "FacultyTree.h"
 #include <fstream>
 using namespace std;
 
-StudentTree::StudentTree()
+FacultyTree::FacultyTree()
 {
   root = NULL;
 }
 
-virtual StudentTree::~StudentTree()
+virtual FacultyTree::~FacultyTree()
 {
 
 }
 
-void StudentTree::insert(int s, string n, string l, string m, double g, int a) // add the rest of the student part requirments
+void FacultyTree::insert(int s, string n, string l, string m, double g, int a) // add the rest of the Faculty part requirments
 {
-  //check if student already exists, if no then continue
-  StudentNode *node = new StudentNode(s, n, l, m, g, a);
+  //check if Faculty already exists, if no then continue
+  FacultyNode *node = new FacultyNode(s, n, l, m, g, a);
 
   if(isEmpty())
   {
@@ -23,14 +23,14 @@ void StudentTree::insert(int s, string n, string l, string m, double g, int a) /
   }
   else//not an empty tree . need to find insertion point
   {
-    StudentNode *current = root;
-    StudentNode *parent;
+    FacultyNode *current = root;
+    FacultyNode *parent;
 
     while(true)// iterate throught the tree
     {
       parent = current;
 
-      if(s < current->studentID)
+      if(s < current->facultyID)
       {
         current = current->left;//go left
 
@@ -54,45 +54,45 @@ void StudentTree::insert(int s, string n, string l, string m, double g, int a) /
   }
 }
 
-void StudentTree::print()
+void FacultyTree::print()
 {
   recPrint(root);
 }
 
-void StudentTree::recPrint(StudentNode * node) // recursive print
+void FacultyTree::recPrint(FacultyNode * node) // recursive print
 {
     if(node == NULL)
     {
       return;
     }
     recPrint(node->left);
-    cout << node->studentID << " " << node->name << " " << node->level << " " << node->major << " " << node->GPA << " " << node-> advisorID << endl;
+    cout << node->facultyID << " " << node->name << " " << node->level << " " << node->department << " " << node->adviseesID << endl;
     recPrint(node->right);
 }
 
-void StudentTree::saveTree()
+void FacultyTree::saveTree()
 {
   recSave(root);
 }
 
-void StudentTree::recSave(StudentNode * node)
+void FacultyTree::recSave(FacultyNode * node)
 {
 
   if(node == NULL)
   {
     return;
   }
-  fstream stSaveFile("StudentSaveData.txt");
+  fstream stSaveFile("FacultySaveData.txt");
   if(stSaveFile.is_open()) // recursively reads through the tree and writes all the data to a text file
   {
     recSave(node->left);
-    stSaveFile << node->studentID << " " << node->name << " " << node->level << " " << node->major << " " << node->GPA << " " << node-> advisorID << endl;
+    stSaveFile << node->facultyID << " " << node->name << " " << node->level << " " << node->department << " " << node->adviseesID << endl;
     recSave(node->right);
   }
 
 }
 
-bool StudentTree::contains(int id)
+bool FacultyTree::contains(int id)
 {
   if(isEmpty())
   {
@@ -100,11 +100,11 @@ bool StudentTree::contains(int id)
   }
   else// not an empty tree
   {
-    StudentNode *current = root;
+    FacultyNode *current = root;
 
-    while(current->studentID != id)
+    while(current->facultyID != id)
     {
-      if(id < current->studentID)//go left
+      if(id < current->facultyID)//go left
       {
         current = current->left;
       }
@@ -119,27 +119,27 @@ bool StudentTree::contains(int id)
    return true;
 }
 
-bool StudentTree::isEmpty()
+bool FacultyTree::isEmpty()
 {
   return root == NULL;
 }
 
-bool StudentTree::deleteNode(StudentNode * node)
+bool FacultyTree::deleteNode(FacultyNode * node)
 {
-  deleteRec(node->studentID);
+  deleteRec(node->facultyID);
 }
 
-bool StudentTree::deleteRec(int id)
+bool FacultyTree::deleteRec(int id)
 {
   if(contains(id))
   {
-    studentNode * parent = root;
-    studentNode * current = root;
+    FacultyNode * parent = root;
+    FacultyNode * current = root;
     bool isLeft = true;
-    while(current->studentID != id)
+    while(current->facultyID != id)
     {
       parent = current;
-      if(current->studentID > id)
+      if(current->facultyID > id)
       {
         isLeft = true;
         current = current->left;
@@ -215,7 +215,7 @@ bool StudentTree::deleteRec(int id)
     }
     else
     {
-      studentNode* successor = getSuccessor(current);
+      FacultyNode* successor = getSuccessor(current);
       if(current == root)
       {
         root = successor;
@@ -240,11 +240,11 @@ bool StudentTree::deleteRec(int id)
   }
 }
 
-StudentNode* getSuccessor(StudentNode* d)
+FacultyNode* getSuccessor(FacultyNode* d)
 {
-  StudentNode *sp = d; //successors parent
-  StudentNode *successor = d;
-  StudentNode *current = d->right;
+  FacultyNode *sp = d; //successors parent
+  FacultyNode *successor = d;
+  FacultyNode *current = d->right;
 
   while(current != NULL)//
   {
@@ -258,31 +258,4 @@ StudentNode* getSuccessor(StudentNode* d)
     successor->right = current->right;
   }
   return sucessor;
-}
-
-void StudentTree::changeAdvisor(int sid, int fid)
-{
-  if(contains(sid))
-  {
-    StudentNode *current = root;
-
-    while(current->studentID != sid)
-    {
-      if(sid < current->studentID)//go left
-      {
-        current = current->left;
-      }
-      else
-      {
-         current = curent->right;
-       }
-     }
-     current->advisorID = fid;
-     cout << "Change complete";
-   }
-   else
-   {
-     cout << "Student Not Found";
-   }
-    // changes students current advisors ID to the one inputed
 }

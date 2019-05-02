@@ -15,7 +15,6 @@ StudentNode::StudentNode(int s, string n, string l, string m, double g, int a)
   major = m;
   GPA = g;
   advisorID = a;
-  
 }
 studentNode::~studentNode()
 {
