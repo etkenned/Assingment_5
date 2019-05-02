@@ -15,7 +15,9 @@ class StudentTree
     bool deleteNode(StudentNode * node);
     bool deleteRec(int id);
     void changeAdvisor(int sid, int fid);
-
+    void printStudentData(int id);
+    int findAdvisor(int sid);
+    void loadSave();
 
     StudentNode* getSuccessor(StudentNode* d);
 

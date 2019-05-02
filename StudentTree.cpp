@@ -77,7 +77,6 @@ void StudentTree::saveTree()
 
 void StudentTree::recSave(StudentNode * node)
 {
-
   if(node == NULL)
   {
     return;
@@ -285,4 +284,60 @@ void StudentTree::changeAdvisor(int sid, int fid)
      cout << "Student Not Found";
    }
     // changes students current advisors ID to the one inputed
+}
+
+void StudentTree::printStudentData(int id)
+{
+  if(contains(id))
+  {
+    StudentNode *current = root;
+
+    while(current->studentID != id)
+    {
+      if(id < current->studentID)//go left
+      {
+        current = current->left;
+      }
+      else
+      {
+         current = curent->right;
+       }
+     }
+     cout << current->studentID << " " << current->name << " " << current->level << " " << current->major << " " << current->GPA << " " << current->advisorID << endl; // prints all the students data
+   }
+   else
+   {
+     cout << "Student Not Found";
+   }
+}
+
+int StuddentTree::findAdvisor(int sid)
+{
+  if(contains(sid))
+  {
+    StudentNode *current = root;
+
+    while(current->studentID != sid)
+    {
+      if(sid < current->studentID)//go left
+      {
+        current = current->left;
+      }
+      else
+      {
+         current = curent->right;
+       }
+     }
+    return (current->advisorID);
+   }
+   else
+   {
+     cout << "Student Not Found";
+     return 0;
+   }
+}
+
+void StudentTree::loadSave()
+{
+
 }

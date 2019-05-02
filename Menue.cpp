@@ -66,27 +66,45 @@ Menue::Menue()
     }
     else if(input == "8")
     {
-
+      int id = 0;
+      cout << "Enter the ID of a student." << endl;
+      id << cin;
+      deleteStudent(id);
     }
     else if(input == "9")
     {
-
+      addFaculty();
     }
     else if(input == "10")
     {
-
+      int id = 0;
+      cout << "Enter the ID of the faculty member." << endl;
+      id << cin;
+      deleteFaculty(id);
     }
     else if(input == "11")
     {
-
+      int id1 = 0;
+      cout << "Enter the ID of the student." << endl;
+      id1 << cin;
+      int id2 = 0;
+      cout << "Enter the ID of the faculty member." << endl;
+      id2 << cin;
+      changeStudentAdvisor(id1, id2);
     }
     else if(input == "12")
     {
-
+      int id1 = 0;
+      cout << "Enter the ID of the faculty member." << endl;
+      id1 << cin;
+      int id2 = 0;
+      cout << "Enter the ID of the student." << endl;
+      id2 << cin;
+      removeFacultyAdvisee(id1, id2);
     }
     else if(input == "13")
     {
-
+      
     }
     else if(input == "14")
     {
@@ -113,19 +131,19 @@ void Menue::printFaculty() // 2
 }
 void Menue::findStudent(int id) // 3
 {
-
+  sTree.printStudentData(id);
 }
 void Menue::findFaculty(int id) // 4
 {
-
+  fTree.printFacultyData(id);
 }
 void Menue::studentAdvisor(int id) // 5
 {
-
+  fTree.findFaculty(sTree.findAdvisor(id));
 }
 void Menue::facultyAdvisee(int id) // 6
 {
-
+  sTree.findStudent(ftree.printAdvisees(id));
 }
 void Menue::addStudent() // 7
 {
@@ -159,7 +177,7 @@ void Menue::addFaculty() // 9
   string n = "";
   string l = "";
   string d = "";
-  int[50] advID;
+  int[10] advID;
   int a = 0;
   cout << "Enter an ID for the faculty member : " << endl;
   fid << cin;
@@ -193,9 +211,9 @@ void Menue::changeStudentAdvisor(int sid, int fid) // 11
 }
 void Menue::removeFacultyAdvisee(int fid, int sid) // 12
 {
-
+  fTree.removeAdvisee(fid, sid);
 }
 void Menue::rollback() // 13
 {
-
+  //load the previous save file
 }

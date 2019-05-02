@@ -14,7 +14,10 @@ class FacultyTree
     bool isEmpty();
     bool deleteNode(FacultyNode * node);
     bool deleteRec(int id);
-
+    void removeAdvisee(int fid, int sid);
+    void printFacultyData(int id);
+    int printAdvisees(int id);
+    void loadSave();
 
     FacultyNode* getSuccessor(FacultyNode* d);
 

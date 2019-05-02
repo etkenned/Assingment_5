@@ -259,3 +259,91 @@ FacultyNode* getSuccessor(FacultyNode* d)
   }
   return sucessor;
 }
+
+void FacultyTree::removeAdvisee(int fid, int sid)
+{
+  if(contains(fid))
+  {
+    FacultyNode *current = root;
+
+    while(current->facultyID != fid)
+    {
+      if(fid < current->facultyID)//go left
+      {
+        current = current->left;
+      }
+      else
+      {
+         current = curent->right;
+      }
+    }
+
+    int[] adviseeArray = current->adviseesID; // saves a copy of the advisee array
+
+    for(int i = 0; i < 9; i++) // removes the student from the list
+    {
+      if(adviseeArray[i] == sid)
+      {
+        adviseeArray[i] == NULL;
+      }
+    }
+    current->adviseesID = adviseeArray;// replaces array with new updated list.
+  }
+}
+
+void FacultyTree::printFacultyData(int id)
+{
+  if(contains(id))
+  {
+    FacultyNode *current = root;
+
+    while(current->facultyID != id)
+    {
+      if(id < current->facultyID)//go left
+      {
+        current = current->left;
+      }
+      else
+      {
+         current = curent->right;
+      }
+    }
+
+    cout << current->facultyID << " " << current->name << " " << current->level << " " << current->department << " " << endl;
+    int[] adviseeArray = current->adviseesID; // saves a copy of the advisee array
+
+    for(int i = 0; i < 9; i++) // prints the list of advisees
+    {
+      if(adviseeArray[i] == sid)
+      {
+        cout << adviseeArray[i];
+      }
+    }
+  }
+}
+
+int FacultyTree::printAdvisees(int id)
+{
+  if(contains(id))
+  {
+    FacultyNode *current = root;
+
+    while(current->facultyID != id)
+    {
+      if(id < current->facultyID)//go left
+      {
+        current = current->left;
+      }
+      else
+      {
+         current = curent->right;
+      }
+    }
+    int[] adviseeArray = current->adviseesID; // saves a copy of the advisee array
+    return adviseeArray[0];
+  }
+  else
+  {
+    return 0;
+  }
+}
