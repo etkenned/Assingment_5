@@ -1,11 +1,13 @@
 #include "FacultyNode.h"
+#include <string>
+using namespace std;
 class FacultyTree
 {
   public:
     FacultyTree();
     virtual ~FacultyTree();
 
-    void insert(int f, string n, string l, string d, int[] a);
+    void insert(int f, string n, string l, string d);
     void print();
     void recPrint(FacultyNode * node);
     void saveTree();

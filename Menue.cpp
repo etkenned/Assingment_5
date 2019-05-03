@@ -1,5 +1,5 @@
 #include "Menue.h"
-
+#include <string>
 using namespace std;
 
 Menue::Menue()
@@ -22,7 +22,7 @@ Menue::Menue()
     cout << "(12) Remove an advisee from a faculty member given the ids" << endl;
     cout << "(13) Rollback" << endl;
     cout << "(14) Exit" << endl;
-    input << cin;
+    getline(cin, input);
 
     if(input == "1")
     {
@@ -34,42 +34,42 @@ Menue::Menue()
     }
     else if(input == "3")
     {
-      int id = 0;
+      string id;
       cout << "Enter the ID of a student." << endl;
-      id << cin;
-      findStudent(id);
+      getline(cin, id);
+      findStudent(stoi(id));
     }
     else if(input == "4")
     {
-      int id = 0;
+      string id;
       cout << "Enter the ID of a faculty member." << endl;
-      id << cin;
-      findFaculty(id);
+      getline(cin, id);
+      findFaculty(stoi(id));
     }
     else if(input == "5")
     {
-      int id = 0;
+      string id;
       cout << "Enter the ID of the student." << endl;
-      id << cin;
-      studentAdvisor(id);
+      getline(cin, id);
+      studentAdvisor(stoi(id));
     }
     else if(input == "6")
     {
-      int id = 0;
+      string id;
       cout << "Enter the ID of the faculty member." << endl;
-      id << cin;
-      facultyAdvisee(id);
+      getline(cin, id);
+      facultyAdvisee(stoi(id));
     }
     else if(input == "7")
     {
-      addStudent()
+      addStudent();
     }
     else if(input == "8")
     {
-      int id = 0;
+      string id;
       cout << "Enter the ID of a student." << endl;
-      id << cin;
-      deleteStudent(id);
+      getline(cin, id);
+      deleteStudent(stoi(id));
     }
     else if(input == "9")
     {
@@ -77,34 +77,34 @@ Menue::Menue()
     }
     else if(input == "10")
     {
-      int id = 0;
+      string id;
       cout << "Enter the ID of the faculty member." << endl;
-      id << cin;
-      deleteFaculty(id);
+      getline(cin, id);
+      deleteFaculty(stoi(id));
     }
     else if(input == "11")
     {
-      int id1 = 0;
+      string id1;
       cout << "Enter the ID of the student." << endl;
-      id1 << cin;
-      int id2 = 0;
+      getline(cin, id1);
+      string id2;
       cout << "Enter the ID of the faculty member." << endl;
-      id2 << cin;
-      changeStudentAdvisor(id1, id2);
+      getline(cin, id2);
+      changeStudentAdvisor(stoi(id1), stoi(id2));
     }
     else if(input == "12")
     {
-      int id1 = 0;
+      string id1;
       cout << "Enter the ID of the faculty member." << endl;
-      id1 << cin;
-      int id2 = 0;
+      getline(cin, id1);
+      string id2;
       cout << "Enter the ID of the student." << endl;
-      id2 << cin;
-      removeFacultyAdvisee(id1, id2);
+      getline(cin, id2);
+      removeFacultyAdvisee(stoi(id1), stoi(id2));
     }
     else if(input == "13")
     {
-      
+
     }
     else if(input == "14")
     {
@@ -139,67 +139,54 @@ void Menue::findFaculty(int id) // 4
 }
 void Menue::studentAdvisor(int id) // 5
 {
-  fTree.findFaculty(sTree.findAdvisor(id));
+  fTree.printFacultyData(sTree.findAdvisor(id));
 }
 void Menue::facultyAdvisee(int id) // 6
 {
-  sTree.findStudent(ftree.printAdvisees(id));
+  sTree.printStudentData(fTree.printAdvisees(id));
 }
 void Menue::addStudent() // 7
 {
-  int sid = 0;
+  string sid;
   string n = "";
   string l = "";
   string m = "";
-  double g = 0.0;
-  int a = 0;
+  string g;
+  string a;
   cout << "Enter an ID for the student : " << endl;
-  sid << cin;
+  getline(cin, sid);
   cout << "Enter the name of the student : " << endl;
-  n << cin;
+  getline(cin, n);
   cout << "Enter level of the student : " << endl;
-  l << cin;
+  getline(cin, l);
   cout << "Enter the major of the student : " << endl;
-  m << cin;
+  getline(cin, m);
   cout << "Enter the GPA of the student : " << endl;
-  g << cin;
+  getline(cin, g);
   cout << "Enter the student's advisor's ID : " << endl;
-  a << cin;
-  sTree.insert(sid, n, l, m, g, a);// creates the new student and inserts the student into the tree
+  getline(cin, a);
+  sTree.insert(stoi(sid), n, l, m, stod(g), stoi(a));// creates the new student and inserts the student into the tree
 }
 void Menue::deleteStudent(int id) // 8
 {
-  sTree.deleteNode(id);
+  sTree.deleteRec(id);
 }
 void Menue::addFaculty() // 9
 {
-  int sid = 0;
+  string fid;
   string n = "";
   string l = "";
   string d = "";
-  int[10] advID;
-  int a = 0;
   cout << "Enter an ID for the faculty member : " << endl;
-  fid << cin;
+  getline(cin, fid);
   cout << "Enter the name of the faculty member : " << endl;
-  n << cin;
+  getline(cin, n);
   cout << "Enter level of the faculty member : " << endl;
-  l << cin;
+  getline(cin, l);
   cout << "Enter the department of the faculty member : " << endl;
-  d << cin;
+  getline(cin, d);
 
-  cout << "How many students are being advised by this faculty member?" << endl;
-  int numAdvisees = 0; // number of students the faculty advises and used for setting the for loop
-  int newID = 0; // used to add each inputed ID to the array
-  numAdvisees << cin;
-  for (int i = 0; i < numAdvisees - 1; i++)
-  {
-    cout << "Enter the ID of a student the faculty member is advising : " << endl;
-    newID << cin;
-    advID[i] = newID;
-  }
-
-  fTree.insert(fid, n, l, d, advID);// creates the new faculty member and inserts them into the tree
+  fTree.insert(stoi(fid), n, l, d);// creates the new faculty member and inserts them into the tree
 }
 void Menue::deleteFaculty(int id) // 10
 {

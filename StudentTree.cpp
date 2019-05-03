@@ -1,5 +1,6 @@
 #include "StudentTree.h"
 #include <fstream>
+#include <string>
 using namespace std;
 
 StudentTree::StudentTree()
@@ -7,7 +8,7 @@ StudentTree::StudentTree()
   root = NULL;
 }
 
-virtual StudentTree::~StudentTree()
+StudentTree::~StudentTree()
 {
 
 }
@@ -114,7 +115,7 @@ bool StudentTree::contains(int id)
       }
       else
       {
-         current = curent->right;
+         current = current->right;
        }
        if(current == NULL)
          return false;
@@ -137,8 +138,8 @@ bool StudentTree::deleteRec(int id)
 {
   if(contains(id))
   {
-    studentNode * parent = root;
-    studentNode * current = root;
+    StudentNode * parent = root;
+    StudentNode * current = root;
     bool isLeft = true;
     while(current->studentID != id)
     {
@@ -219,7 +220,7 @@ bool StudentTree::deleteRec(int id)
     }
     else
     {
-      studentNode* successor = getSuccessor(current);
+      StudentNode* successor = getSuccessor(current);
       if(current == root)
       {
         root = successor;
@@ -244,7 +245,7 @@ bool StudentTree::deleteRec(int id)
   }
 }
 
-StudentNode* getSuccessor(StudentNode* d)
+StudentNode* StudentTree::getSuccessor(StudentNode* d)
 {
   StudentNode *sp = d; //successors parent
   StudentNode *successor = d;
@@ -253,15 +254,15 @@ StudentNode* getSuccessor(StudentNode* d)
   while(current != NULL)//
   {
     sp = successor;
-    sucessor = current;
+    successor = current;
     current = current->left;
   }
-  if(sucessor != d->right)
+  if(successor != d->right)
   {
     sp->left = successor->right;
     successor->right = current->right;
   }
-  return sucessor;
+  return successor;
 }
 
 void StudentTree::changeAdvisor(int sid, int fid)
@@ -278,7 +279,7 @@ void StudentTree::changeAdvisor(int sid, int fid)
       }
       else
       {
-         current = curent->right;
+         current = current->right;
        }
      }
      current->advisorID = fid;
@@ -305,7 +306,7 @@ void StudentTree::printStudentData(int id)
       }
       else
       {
-         current = curent->right;
+         current = current->right;
        }
      }
      cout << current->studentID << " " << current->name << " " << current->level << " " << current->major << " " << current->GPA << " " << current->advisorID << endl; // prints all the students data
@@ -316,7 +317,7 @@ void StudentTree::printStudentData(int id)
    }
 }
 
-int StuddentTree::findAdvisor(int sid)
+int StudentTree::findAdvisor(int sid)
 {
   if(contains(sid))
   {
@@ -330,7 +331,7 @@ int StuddentTree::findAdvisor(int sid)
       }
       else
       {
-         current = curent->right;
+         current = current->right;
        }
      }
     return (current->advisorID);
@@ -345,7 +346,7 @@ int StuddentTree::findAdvisor(int sid)
 void StudentTree::loadSave()
 {
   string line = "";
-  fstream loadFile("StudentSaveData.txt")
+  fstream loadFile("StudentSaveData.txt");
   if(loadFile.is_open())
   {
     int tempID;
@@ -360,35 +361,48 @@ void StudentTree::loadSave()
     bool four = true;
     bool five = true;
     bool six = true;
-     while(getline(inputFile,line))
+     while(getline(loadFile,line))
      {
        if(one)
        {
-         tempID = line;
+         tempID = stoi(line);
+         one = false;
        }
        else if(two)
        {
          tempName = line;
+         two = false;
        }
        else if(three)
        {
          tempLevel = line;
+         three = false;
        }
        else if(four)
        {
          tempMajor = line;
+         four = false;
        }
        else if(five)
        {
-         tempGPA = line;
+         tempGPA = stod(line);
+         five = false;
        }
        else if(six)
        {
-         tempAdvisor = line;
+         tempAdvisor = stoi(line);
+         six = false;
        }
        else
        {
-         //make the new student and insert them
+         insert(tempID, tempName, tempLevel, tempMajor, tempGPA, tempAdvisor);//make the new student and insert them
+         one = true;
+         two = true;
+         three = true;
+         four = true;
+         five = true;
+         six = true;
+         //resets the bools
        }
      }
   }

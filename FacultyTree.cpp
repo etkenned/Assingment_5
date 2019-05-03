@@ -1,5 +1,6 @@
-Faculty#include "FacultyTree.h"
+#include "FacultyTree.h"
 #include <fstream>
+#include <string>
 using namespace std;
 
 FacultyTree::FacultyTree()
@@ -7,15 +8,15 @@ FacultyTree::FacultyTree()
   root = NULL;
 }
 
-virtual FacultyTree::~FacultyTree()
+FacultyTree::~FacultyTree()
 {
 
 }
 
-void FacultyTree::insert(int s, string n, string l, string m, double g, int a) // add the rest of the Faculty part requirments
+void FacultyTree::insert(int s, string n, string l, string m) // add the rest of the Faculty part requirments
 {
   //check if Faculty already exists, if no then continue
-  FacultyNode *node = new FacultyNode(s, n, l, m, g, a);
+  FacultyNode *node = new FacultyNode(s, n, l, m);
 
   if(isEmpty())
   {
@@ -110,7 +111,7 @@ bool FacultyTree::contains(int id)
       }
       else
       {
-         current = curent->right;
+         current = current->right;
        }
        if(current == NULL)
          return false;
@@ -240,7 +241,7 @@ bool FacultyTree::deleteRec(int id)
   }
 }
 
-FacultyNode* getSuccessor(FacultyNode* d)
+FacultyNode* FacultyTree::getSuccessor(FacultyNode* d)
 {
   FacultyNode *sp = d; //successors parent
   FacultyNode *successor = d;
@@ -249,15 +250,15 @@ FacultyNode* getSuccessor(FacultyNode* d)
   while(current != NULL)//
   {
     sp = successor;
-    sucessor = current;
+    successor = current;
     current = current->left;
   }
-  if(sucessor != d->right)
+  if(successor != d->right)
   {
     sp->left = successor->right;
     successor->right = current->right;
   }
-  return sucessor;
+  return successor;
 }
 
 void FacultyTree::removeAdvisee(int fid, int sid)
@@ -274,17 +275,17 @@ void FacultyTree::removeAdvisee(int fid, int sid)
       }
       else
       {
-         current = curent->right;
+         current = current->right;
       }
     }
 
-    int[] adviseeArray = current->adviseesID; // saves a copy of the advisee array
+    int * adviseeArray = current->adviseesID; // saves a copy of the advisee array
 
     for(int i = 0; i < 9; i++) // removes the student from the list
     {
       if(adviseeArray[i] == sid)
       {
-        adviseeArray[i] == NULL;
+        adviseeArray[i] == 0;
       }
     }
     current->adviseesID = adviseeArray;// replaces array with new updated list.
@@ -305,16 +306,16 @@ void FacultyTree::printFacultyData(int id)
       }
       else
       {
-         current = curent->right;
+         current = current->right;
       }
     }
 
     cout << current->facultyID << " " << current->name << " " << current->level << " " << current->department << " " << endl;
-    int[] adviseeArray = current->adviseesID; // saves a copy of the advisee array
+    int * adviseeArray = current->adviseesID; // saves a copy of the advisee array
 
     for(int i = 0; i < 9; i++) // prints the list of advisees
     {
-      if(adviseeArray[i] == sid)
+      if(adviseeArray[i] == id)
       {
         cout << adviseeArray[i];
       }
@@ -336,10 +337,10 @@ int FacultyTree::printAdvisees(int id)
       }
       else
       {
-         current = curent->right;
+         current = current->right;
       }
     }
-    int[] adviseeArray = current->adviseesID; // saves a copy of the advisee array
+    int * adviseeArray = current->adviseesID; // saves a copy of the advisee array
     return adviseeArray[0];
   }
   else

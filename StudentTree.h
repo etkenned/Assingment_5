@@ -1,4 +1,6 @@
 #include "StudentNode.h"
+#include <string>
+using namespace std;
 class StudentTree
 {
   public:
